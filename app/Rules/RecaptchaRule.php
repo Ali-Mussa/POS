@@ -16,7 +16,7 @@ class RecaptchaRule implements Rule
             return false;
         }
 
-        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+        $response = Http::withoutVerifying()->asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
             'secret'   => config('services.recaptcha.secret_key'),
             'response' => $value,
             'remoteip' => request()->ip(),
